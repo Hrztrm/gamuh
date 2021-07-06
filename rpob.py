@@ -17,13 +17,9 @@ s.listen(2)
 print("\n\t~~~~~~~~~~ Simple Game Server ~~~~~~~~~~ ")
 print("---------------------------------------------------")
 print(f"[*] Listening as {SERVER_HOST}:{SERVER_PORT}")
-<<<<<<< HEAD
 menu = "1. Attack\n2. Defend\n3. Analyze\n4. Warp\n5. Heal\n6. Wait\n\n"
-=======
 menu = "\n!! Make your move NOW !! \n1. Attack\n2. Defend\n3. Analyze\n4. Warp\n                                                                                                             5. Wait\n\n"
->>>>>>> 2aedde634e14c58f831a0fb12fa75a076a2e7679
 death_count = 0
-
 class enemy:
     def __init__(self, typ, stren, agil, intel):
         self.typ = typ
@@ -39,7 +35,7 @@ class enemy:
         self.intel = intel
 
     def p_stat(self):
-        return f"Type: {self.typ}\nHealth: {self.c_hp}/{self.m_hp}\nStrength: {s                                                                                                             elf.stren}\nAgility: {self.agil}\nIntelligence: {self.intel}"
+        return f"Type: {self.typ}\nHealth: {self.c_hp}/{self.m_hp}\nStrength: {self.stren}\nAgility: {self.agil}\nIntelligence: {self.intel}"
 
     def take_dmg(self, dmg):
         self.c_hp = self.c_hp - dmg
@@ -78,7 +74,7 @@ def stoa(msg):
 class adv:
     def __init__(self, cl, stren, agil, intel):
         self.cl = cl
-        #if cl == "Warrior":   #Not used because it will be unfair to people who                                                                                                              got mage, which have the worst hp = one shot killed by everything
+        #if cl == "Warrior":   #Not used because it will be unfair to people who got mage, which have the worst hp = one shot killed by everything
         #    self.c_hp = stren + 10
         #    self.m_hp = stren + 10
         #elif cl == "Archer":
@@ -210,8 +206,8 @@ def w_room():
         player+=1
 
 def select(play):
-    norm = f"1. Player 1: {pl[0].cond()}\n2. Player 2: {pl[1].cond()}\n3. {enemy                                                                                                             1.typ}: {enemy1.cond()}\n\n5. Back"
-    hide = f"1. Player 1: {pl[0].cond()}\n2. Player 2: {pl[1].cond()}\n3. Hidden                                                                                                             : {enemy1.cond()}\n\n5. Back"
+    norm = f"1. Player 1: {pl[0].cond()}\n2. Player 2: {pl[1].cond()}\n3. {enemy1.typ}: {enemy1.cond()}\n\n5. Back"
+    hide = f"1. Player 1: {pl[0].cond()}\n2. Player 2: {pl[1].cond()}\n3. Hidden: {enemy1.cond()}\n\n5. Back"
     if play == 0:
         if pl[play].insight == 0:
             sto1(pl1, hide + "\nWho?")
@@ -255,8 +251,8 @@ def death_check():
         endprog()
 
 def hidden(hid ,player):
-    norm = f"\nPlayer 1: {pl[0].cond()}\nPlayer 2: {pl[1].cond()}\n{enemy1.typ}:                                                                                                              {enemy1.cond()}\n\n"
-    hide = f"\nPlayer 1: {pl[0].cond()}\nPlayer 2: {pl[1].cond()}\nHidden: {enem                                                                                                             y1.cond()}\n\n"
+    norm = f"\nPlayer 1: {pl[0].cond()}\nPlayer 2: {pl[1].cond()}\n{enemy1.typ}: {enemy1.cond()}\n\n"
+    hide = f"\nPlayer 1: {pl[0].cond()}\nPlayer 2: {pl[1].cond()}\nHidden: {enemy1.cond()}\n\n"
     if hid == 0:
         sto1(player, hide)
     elif hid == 1:
@@ -266,8 +262,7 @@ def turn(play): #play = 0 == PLayer 1 turn, play = 1 == Player 2 turn
     while True:
         dc = 0
         act = "0"
-<<<<<<< HEAD
-        while act != "1" and act != "2" and act != "3" and act != "4" and act !=                                                                                                              "5" and act != "6":
+        while act != "1" and act != "2" and act != "3" and act != "4" and act != "5" and act != "6":
             act = "0"
             if play == 0 and not pl[0].dead:
                 try:
@@ -305,25 +300,6 @@ def turn(play): #play = 0 == PLayer 1 turn, play = 1 == Player 2 turn
 
         if dc == 1:
             break
-=======
-        while act != "1" and act != "2" and act != "3" and act != "4" and act !=                                                                                                              "5":
-            if play == 0:
-                if not pl[1].dead:
-                    sto1(pl2, "\nWaiting for Player 1 to finish turn")
-                hidden(pl[play].insight, pl1)
-                sto1(pl1, pl[play].p_stat() + "\n\n")
-                sto1(pl1, menu)
-                sto1(pl1, "\n\nCommand: ")
-                act = pl1.recv(1024).decode()
-            elif play == 1:
-                if not pl[0].dead:
-                    sto1(pl1, "\nWaiting for Player 2 to finish turn")
-                hidden(pl[play].insight, pl2)
-                sto1(pl2, pl[play].p_stat() + "\n\n")
-                sto1(pl2, menu)
-                sto1(pl2, "\n\nCommand: ")
-                act = pl2.recv(1024).decode()
->>>>>>> 2aedde634e14c58f831a0fb12fa75a076a2e7679
 
         if act == "1":
             print("Attacking")
@@ -395,24 +371,16 @@ def turn(play): #play = 0 == PLayer 1 turn, play = 1 == Player 2 turn
 
     death_check()
 
-def battle(boss):
+def battle():
     play = 0
     if not pl[0].dead:
-<<<<<<< HEAD
         sto1(pl1, "\nYou have encountered an enemy, prepare for BATTLE.\n")
     if not pl[1].dead:
         sto1(pl2, "\nYou have encountered an enemy, prepare for BATTLE.\n")
-=======
-        sto1(pl1, "\nYou have encountered an enemy, prepare for BATTLE.\n") #Cha                                                                                                             nge to stoa
-    if not pl[1].dead:
-        sto1(pl2, "\nYou have encountered an enemy, prepare for BATTLE.\n") #Cha                                                                                                             nge to stoa
->>>>>>> 2aedde634e14c58f831a0fb12fa75a076a2e7679
     global enemy1
     global death_count
-    if boss == 0:
-        enemy1 = enemy(random.choice(l_enemy), random.randint(5,10), random.rand                                                                                                             int(5,10), random.randint(5,10))
-    #elif boss == 1:
-        #enemy1 = enemy( #Boss stats
+    enemy1 = enemy(random.choice(l_enemy), random.randint(5,10), random.randint(5,10), random.randint(5,10))
+    print("Created enemy\n" + enemy1.p_stat())
     while enemy1.c_hp > 0: #Fight until enemy dies
         if pl[0].agil >= pl[1].agil: #Player 1 then player 2
             if not pl[0].dead:
@@ -427,7 +395,7 @@ def battle(boss):
         if enemy1.c_hp > 0: #Enemy's Turn
             if enemy1.typ == "Goblin":
                 if pl[0].intel >= pl[1].intel and not pl[1].dead:
-                    pl[1].take_dmg(enemy1.deal_dmg())
+                    pl[0].take_dmg(enemy1.deal_dmg())
                 else:
                     pl[0].take_dmg(enemy1.deal_dmg())
             elif enemy1.typ == "Orc":
@@ -459,9 +427,9 @@ def battle(boss):
 def sac_room():
     print("Sacrifical Room")
     if not pl[0].dead:
-        sto1(pl1, "You encountered a room with an altar in the middle. There are                                                                                                              carvings on the floor that says \"Sacrifice some of your partner's life for gre                                                                                                             ater power\"\nWhat will you do?\n\n1. Sacrifice\n2. Leave")
+        sto1(pl1, "You encountered a room with an altar in the middle. There are carvings on the floor that says \"Sacrifice some of your partner's life for gre                                                                                                             ater power\"\nWhat will you do?\n\n1. Sacrifice\n2. Leave")
     if not pl[1].dead:
-        sto1(pl2, "You encountered a room with an altar in the middle. There are                                                                                                              carvings on the floor that says \"Sacrifice some of your partner's life for gre                                                                                                             ater power\"\nWhat will you do?\n\n1. Sacrifice\n2. Leave")
+        sto1(pl2, "You encountered a room with an altar in the middle. There are carvings on the floor that says \"Sacrifice some of your partner's life for gre                                                                                                             ater power\"\nWhat will you do?\n\n1. Sacrifice\n2. Leave")
     if not pl[0].dead:
         if not pl[1].dead:
             sto1(pl2, "Waiting for player 1")
@@ -484,9 +452,9 @@ def sac_room():
 def rec_room():
     print("Recovery Room")
     if not pl[0].dead:
-        sto1(pl1, "You encountered a room with a statue inside. Carvings on the                                                                                                              statues that says \"Answer with unison, fruition shall follow. Answer with contr                                                                                                             ast, only dust will follow\"\nWhat will you do?\n\n1. Single heal\n2. All heal")
+        sto1(pl1, "You encountered a room with a statue inside. Carvings on the statues that says \"Answer with unison, fruition shall follow. Answer with contr                                                                                                             ast, only dust will follow\"\nWhat will you do?\n\n1. Single heal\n2. All heal")
     if not pl[1].dead:
-        sto1(pl2, "You encountered a room with a statue inside. Carvings on the                                                                                                              statues that says \"Answer with unison, fruition shall follow. Answer with contr                                                                                                             ast, only dust will follow\"\nWhat will you do?\n\n1. Single heal\n2. All heal")
+        sto1(pl2, "You encountered a room with a statue inside. Carvings on the statues that says \"Answer with unison, fruition shall follow. Answer with contr                                                                                                             ast, only dust will follow\"\nWhat will you do?\n\n1. Single heal\n2. All heal")
     if not pl[0].dead:
         if not pl[1].dead:
             sto1(pl2, "Waiting for player 1")
@@ -551,9 +519,8 @@ while n_enc <= 5:
     elif n_enc == 5:
         rec_room()
     else:
-        battle(0)
+        battle()
 
-battle(1)
 i = 0
 for cd in all_cs:
     if not pl[i].dead:
